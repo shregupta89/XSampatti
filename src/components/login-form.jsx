@@ -3,11 +3,12 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import axios from "axios"
 import { useToast } from "@/hooks/use-toast"
 import { useNavigate } from "react-router-dom"
 import { ToastAction } from "@radix-ui/react-toast"
+import { UserContext } from "@/context/UserContext"
 
 export function LoginForm({
   className,
@@ -18,6 +19,7 @@ export function LoginForm({
   const [password,setPassword] = useState("")
   const {toast} = useToast()
   const navigate = useNavigate()
+  const {setEmail,setFirstname,setLastname} = useContext(UserContext)
 
   const submitForm = async(e)=>{
     e.preventDefault()
@@ -25,7 +27,7 @@ export function LoginForm({
       return
     }
     try {
-          const response = await axios.post('/api/signin',{username,password})
+          const response = await axios.post('/api/signin',{username,password},{withCredentials:true})
           if(response.data.error){
             toast({
               variant: "destructive",
@@ -35,6 +37,10 @@ export function LoginForm({
             })
             return
           }
+          setEmail(response.data.username)
+          setFirstname(response.data.firstname)
+          setLastname(response.data.setLastname)
+
           navigate('/dashboard')
     } catch (error) {
         toast({
