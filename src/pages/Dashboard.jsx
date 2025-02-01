@@ -1,8 +1,12 @@
-import React from 'react'
+import RecentExpenses from '@/components/RecentExpenses'
+
+import React, { useContext, useEffect } from 'react'
+
 
 import { BarGraph } from '@/components/BarGraph'
 import { DonutChart } from '@/components/DonutChart'
 const Dashboard = () => {
+    
   return (
     <div>
       <div className='grid grid-cols-12 h-screen w-screen'>
