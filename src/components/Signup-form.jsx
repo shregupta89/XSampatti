@@ -9,13 +9,16 @@ import { useToast } from "@/hooks/use-toast"
 import { useNavigate } from "react-router-dom"
 import { ToastAction } from "@radix-ui/react-toast"
 
-export function LoginForm({
+export default function SignupForm({
   className,
   ...props
 }) {
 
   const [username,setUsername] = useState("")
   const [password,setPassword] = useState("")
+  const [firstname,setFirstname] = useState("")
+  const [lastname,setLastname] = useState("")
+
   const {toast} = useToast()
   const navigate = useNavigate()
 
@@ -25,7 +28,7 @@ export function LoginForm({
       return
     }
     try {
-          const response = await axios.post('/api/signin',{username,password})
+          const response = await axios.post('/api/signup',{username,password,firstname,lastname})
           if(response.data.error){
             toast({
               variant: "destructive",
@@ -35,8 +38,8 @@ export function LoginForm({
             })
             return
           }
-          navigate('/dashboard')
-    } catch (error) {
+          navigate('/login')
+    } catch (error) {        
         toast({
           variant: "destructive",
           title: "Uh oh! Something went wrong.",
@@ -52,35 +55,34 @@ export function LoginForm({
       <Card className="overflow-hidden">
         <CardContent className="grid p-0 md:grid-cols-2">
           <form className="p-6 md:p-8" onSubmit={(e)=>submitForm(e)}>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-3">
               <div className="flex flex-col items-center text-center">
-                <h1 className="text-2xl font-bold">Welcome back</h1>
-                <p className="text-balance text-muted-foreground">
-                  Login to your Expen account
-                </p>
+                <h1 className="text-2xl font-bold">Create Account</h1>
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input onChange={(e)=>setUsername(e.target.value)} id="email" type="email" placeholder="m@example.com" required />
+                <Label htmlFor="s-email">Email</Label>
+                <Input onChange={(e)=>setUsername(e.target.value)} id="s-email" type="email" placeholder="m@example.com" required />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="s-firstname">First Name</Label>
+                <Input onChange={(e)=>setFirstname(e.target.value)} id="s-firstname"  placeholder="John" required />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="s-lastname">LastName</Label>
+                <Input onChange={(e)=>setLastname(e.target.value)} id="s-lastname"  placeholder="Doe" required />
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="s-password">Password</Label>
                   <a href="#" className="ml-auto text-sm underline-offset-2 hover:underline">
                     Forgot your password?
                   </a>
                 </div>
-                <Input onChange={(e)=>setPassword(e.target.value)} id="password" type="password" required />
+                <Input onChange={(e)=>setPassword(e.target.value)} id="s-password" type="password" placeholder="Passsword" required />
               </div>
               <Button type="submit" className="w-full">
-                Login
+                Sign Up
               </Button>
-              <div className="text-center text-sm">
-                Don&apos;t have an account?{" "}
-                <a href="#" className="underline underline-offset-4">
-                  Sign up
-                </a>
-              </div>
             </div>
           </form>
           <div className="relative hidden bg-muted md:block">
