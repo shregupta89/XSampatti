@@ -4,6 +4,7 @@ import Signup from './pages/Signup'
 import LandingPage from './pages/LandingPage'
 import { Toaster } from './components/ui/toaster'
 import Dashboard from './pages/Dashboard'
+import PrivateRoutes from './utils/PrivateRoutes'
 function App() {
 
 
@@ -13,7 +14,10 @@ function App() {
       <Route path='/' element={<LandingPage/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/signup' element={<Signup/>}/>
-      <Route path='/dashboard' element={<Dashboard/>}/>
+      {/* <Route element={<PrivateRoutes/>}> */}
+        <Route path='/dashboard' element={<Dashboard/>}/>
+      {/* </Route> */}
+     
     </Routes>
     <Toaster/>
     </>

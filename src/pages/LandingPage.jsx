@@ -1,8 +1,13 @@
-import React from 'react'
 
 const LandingPage = () => {
   return (
+    <div>
+        
     <div>LandingPage</div>
+   
+
+    </div>
+ 
   )
 }
 
