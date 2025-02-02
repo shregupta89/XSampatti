@@ -5,27 +5,29 @@ import React, { useContext, useEffect } from 'react'
 
 import { BarGraph } from '@/components/BarGraph'
 import { DonutChart } from '@/components/DonutChart'
+import DisplayReminder from '@/components/DisplayReminder'
+import { Profile } from '@/components/Profile'
 const Dashboard = () => {
     
   return (
-    <div>
-      <div className='grid grid-cols-12 h-screen w-screen'>
-        <div className='col-span-1'>
+    // <div>
+      <div className='grid grid-cols-12 h-svh w-svw '>
+        <div className=' h-svh col-span-1 '>
          sidebar 
         </div>
-        <div className='col-span-3'>
-         recent activity 
+        <div className=' h-svh col-span-3 '>
+         <RecentExpenses/>
         </div>
-        <div className='col-span-8 grid grid-rows-3'>
+        <div className='h-svh  col-span-8 grid grid-rows-3 '>
           {/* upper green component */}
           <div className='row-span-2 grid grid-cols-3'>
             {/* left blue component */}
             <div className='col-span-2 grid grid-rows-2'>
-              <div className='row-span-1'>
+              <div className='row-span-1 p-3 '>
                 <BarGraph/>
               </div>
-              <div className='row-span-1 grid grid-cols-2'>
-                <div className='cols-span-1'>
+              <div className='row-span-1 grid grid-cols-2 '>
+                <div className='cols-span-1 '>
                 <DonutChart/>
                 </div>
                 <div className='cols-span-1 grid grid-rows-2'>
@@ -46,7 +48,7 @@ const Dashboard = () => {
                   add expense button
                 </div>
                 <div className='col-span-1'>
-                  profile
+                    <Profile/>
                 </div>
 
               </div>
@@ -60,17 +62,18 @@ const Dashboard = () => {
           {/* lower green component */}
           <div className='row-span-1 grid grid-cols-2'>
             <div className='col-span-1'>
-              reminers for spenditure
+              <DisplayReminder outgoing = {true}/>
             </div>
             <div className='col-span-1'>
-              reminers for acceptance
+              <DisplayReminder outgoing = {false}/>
+
             </div>
           </div>
       
         </div>
       </div>
   
-    </div>
+    // </div>
 
   )
 }

@@ -39,7 +39,7 @@ export function LoginForm({
           }
           setEmail(response.data.username)
           setFirstname(response.data.firstname)
-          setLastname(response.data.setLastname)
+          setLastname(response.data.lastname)
 
           navigate('/dashboard')
     } catch (error) {

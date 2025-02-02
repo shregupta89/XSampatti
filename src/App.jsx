@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage'
 import { Toaster } from './components/ui/toaster'
 import Dashboard from './pages/Dashboard'
 import PrivateRoutes from './utils/PrivateRoutes'
+import ReminderPage from './pages/ReminderPage'
 function App() {
 
 
@@ -17,6 +18,8 @@ function App() {
       {/* <Route element={<PrivateRoutes/>}> */}
         <Route path='/dashboard' element={<Dashboard/>}/>
       {/* </Route> */}
+      <Route path='/reminders' element={<ReminderPage/>}/>
+
      
     </Routes>
     <Toaster/>

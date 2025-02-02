@@ -7,6 +7,7 @@ import { useToast } from '@/hooks/use-toast'
 import { ToastAction } from '@radix-ui/react-toast'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { ScrollArea } from "./ui/scroll-area";
 const RecentExpenses = () => {
   const { expenses , setExpenses} = useContext(ExpenseContext);
   const {toast} = useToast()
@@ -46,9 +47,10 @@ const RecentExpenses = () => {
   
 
   return (
-    <div className="w-full h-full mx-auto p-4">
+    <div className="w-full h-full mx-auto p-4 ">
       <h2 className="text-lg font-semibold mb-4">Recent Expenses</h2>
-      <Card>
+      <ScrollArea>
+      <Card className=" h-96">
         <CardContent className="p-4">
           <ul className="space-y-3">
             {expenses.length > 0 ? (
@@ -67,6 +69,7 @@ const RecentExpenses = () => {
           </ul>
         </CardContent>
       </Card>
+      </ScrollArea>
     </div>
   );
 };

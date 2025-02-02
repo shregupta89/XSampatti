@@ -58,17 +58,16 @@ export function DonutChart() {
   }, [])
 
   return (
-    <Card className="flex flex-col">
-      <CardHeader className="items-center pb-0">
+    <Card className="flex flex-col h-40">
+      {/* <CardHeader className="items-center pb-0">
         <CardTitle>Pie Chart - Donut with Text</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
-      </CardHeader>
-      <CardContent className="flex-1 pb-0">
+      </CardHeader> */}
+      <CardContent className="flex-1 pb-0 h-32 flex-row w-full">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
+          className="  max-h-[250px]"
         >
-          <PieChart>
+          <PieChart className=" ">
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
@@ -77,7 +76,8 @@ export function DonutChart() {
               data={chartData}
               dataKey="visitors"
               nameKey="browser"
-              innerRadius={60}
+              innerRadius={40}
+              outerRadius={50}
               strokeWidth={5}
             >
               <Label
@@ -90,20 +90,20 @@ export function DonutChart() {
                         textAnchor="middle"
                         dominantBaseline="middle"
                       >
-                        <tspan
+                        {/* <tspan
                           x={viewBox.cx}
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
-                        >
-                          {totalVisitors.toLocaleString()}
-                        </tspan>
-                        <tspan
+                        > */}
+                          {/* {totalVisitors.toLocaleString()} */}
+                        {/* </tspan> */}
+                        {/* <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
                           Visitors
-                        </tspan>
+                        </tspan> */}
                       </text>
                     )
                   }
@@ -114,12 +114,7 @@ export function DonutChart() {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
-        </div>
+        Category wise distribution
       </CardFooter>
     </Card>
   )

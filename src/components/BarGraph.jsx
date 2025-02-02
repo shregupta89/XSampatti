@@ -34,19 +34,18 @@ const chartConfig = {
 
 export function BarGraph() {
   return (
-    <Card>
+    <Card className= " h-36 w-96">
       <CardHeader>
-        <CardTitle>Daily expenses</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle >Daily expenses</CardTitle>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig}>
+        <ChartContainer className=" h-[90px] w-80" config={chartConfig}>
           <BarChart accessibilityLayer data={chartData}>
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="month"
               tickLine={false}
-              tickMargin={10}
+              tickMargin={3}
               axisLine={false}
               tickFormatter={(value) => value.slice(0, 3)}
             />

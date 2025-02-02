@@ -6,6 +6,7 @@ import App from './App.jsx'
 import axios from 'axios'
 import { UserContextProvider } from './context/UserContext'
 import { ExpenseContextProvider } from './context/ExpenseContext'
+import { ReminderContextProvider } from './context/ReminderContext'
 
 
 const apiUrl =import.meta.env.VITE_API_URL
@@ -16,7 +17,9 @@ createRoot(document.getElementById('root')).render(
     <Router>
     <UserContextProvider>
     <ExpenseContextProvider>
+    <ReminderContextProvider>
       <App />
+    </ReminderContextProvider>
     </ExpenseContextProvider>
     </UserContextProvider>
     </Router>
