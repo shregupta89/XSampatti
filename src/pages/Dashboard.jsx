@@ -3,13 +3,32 @@ import RecentExpenses from '@/components/RecentExpenses'
 import React, { useContext, useEffect } from 'react'
 
 
+
 import { BarGraph } from '@/components/BarGraph'
 import { DonutChart } from '@/components/DonutChart'
+import { AppSidebar } from '@/components/app-sidebar'
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar"
 import DisplayReminder from '@/components/DisplayReminder'
 import { Profile } from '@/components/Profile'
 const Dashboard = () => {
     
   return (
+    <div>
+      <div className='grid grid-cols-12 h-screen w-screen'>
+        <div className='col-span-1'>
+              <SidebarProvider
+                style={
+                  {
+                    "--sidebar-width": "350px",
+                  } 
+                }
+              >
+                <AppSidebar/>
+              </SidebarProvider>
     // <div>
       <div className='grid grid-cols-12 h-svh w-svw '>
         <div className=' h-svh col-span-1 '>
