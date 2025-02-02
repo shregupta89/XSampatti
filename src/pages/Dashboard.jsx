@@ -1,4 +1,9 @@
-import React from 'react'
+import RecentExpenses from '@/components/RecentExpenses'
+
+import React, { useContext, useEffect } from 'react'
+
+
+
 import { BarGraph } from '@/components/BarGraph'
 import { DonutChart } from '@/components/DonutChart'
 import { AppSidebar } from '@/components/app-sidebar'
@@ -8,6 +13,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 const Dashboard = () => {
+    
   return (
     <div>
       <div className='grid grid-cols-12 h-screen w-screen'>
