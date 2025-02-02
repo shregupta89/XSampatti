@@ -1,13 +1,26 @@
 import React from 'react'
-
 import { BarGraph } from '@/components/BarGraph'
 import { DonutChart } from '@/components/DonutChart'
+import { AppSidebar } from '@/components/app-sidebar'
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar"
 const Dashboard = () => {
   return (
     <div>
       <div className='grid grid-cols-12 h-screen w-screen'>
         <div className='col-span-1'>
-         sidebar 
+              <SidebarProvider
+                style={
+                  {
+                    "--sidebar-width": "350px",
+                  } 
+                }
+              >
+                <AppSidebar/>
+              </SidebarProvider>
         </div>
         <div className='col-span-3'>
          recent activity 
