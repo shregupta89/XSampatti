@@ -4,24 +4,27 @@ import Signup from './pages/Signup'
 import LandingPage from './pages/LandingPage'
 import { Toaster } from './components/ui/toaster'
 import Dashboard from './pages/Dashboard'
-import PrivateRoutes from './utils/PrivateRoutes'
 import ReminderPage from './pages/ReminderPage'
+import Layout from './components/Layout'
+
 function App() {
 
 
   return (
     <>
+    {/* <Layout> */}
     <Routes>
       <Route path='/' element={<LandingPage/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/signup' element={<Signup/>}/>
       {/* <Route element={<PrivateRoutes/>}> */}
-        <Route path='/dashboard' element={<Dashboard/>}/>
       {/* </Route> */}
+        <Route path='/dashboard' element={<Dashboard/>}/>
       <Route path='/reminders' element={<ReminderPage/>}/>
 
      
     </Routes>
+    {/* </Layout>/ */}
     <Toaster/>
     </>
   )

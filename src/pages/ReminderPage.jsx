@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash2 } from "lucide-react";
+import { ReminderContext } from '@/context/ReminderContext';
+import { UserContext, UserContextProvider } from '@/context/UserContext';
 
 const ReminderCard = ({ title, date, amount, onEdit, onDelete }) => {
   return (
@@ -38,12 +40,6 @@ const ReminderCard = ({ title, date, amount, onEdit, onDelete }) => {
 };
 
 const ReminderPage = () => {
-  // Sample data - replace with your actual data
-  const paymentReminders = [
-    { id: 1, title: "Rent Payment", date: "2025-02-15", amount: 1200 },
-    { id: 2, title: "Utility Bill", date: "2025-02-20", amount: 150 }
-
-  ];
 
   const receivingReminders = [
     { id: 1, title: "Client Payment", date: "2025-02-10", amount: 2500 },
@@ -62,30 +58,36 @@ const ReminderPage = () => {
     console.log('Add new', type, 'reminder');
   };
 
+  const {reminder}= useContext(ReminderContext)
+  const {email}=useContext(UserContext)
+
+  console.log(email);
+  
+
   return (
-    <Card className=" h-screen w-screen p-2 overflow-hidden">
-      <CardHeader className="pb-2">
+    <Card className=" h-screen w-screen p-1 overflow-hidden">
+      <CardHeader className="pb-1">
         <CardTitle className="text-lg">Set Reminders</CardTitle>
       </CardHeader>
       <CardContent className=" h-full ">
         <div className="flex gap-6 flex-col h-5/6 md:flex-row">
           {/* Payment Reminder Card */}
-          <Card className="flex-1 p-2 h-full">
+          <Card className="flex-1 p-1 h-full">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-normal">
+              <CardTitle className="text-md font-normal">
                 all payment reminder
               </CardTitle>
             </CardHeader>
             <CardContent className=" flex h-5/6 flex-col ">
               <div className="min-h-[100px] flex h-full flex-col gap-3">
-                {paymentReminders.map((reminder) => (
+                {reminder.map((r) => (
                   <ReminderCard
-                    key={reminder.id}
-                    title={reminder.title}
-                    date={reminder.date}
-                    amount={reminder.amount}
-                    onEdit={() => handleEdit(reminder.id)}
-                    onDelete={() => handleDelete(reminder.id)}
+                    key={r._id}
+                    title={r.category.name}
+                    date={r.dayOfMonth}
+                    amount={r.amount}
+                    onEdit={() => handleEdit(r._id)}
+                    onDelete={() => handleDelete(r._id)}
                   />
                 ))}
               </div>

@@ -30,6 +30,9 @@ const DisplayReminder = (props) => {
     }
     try {
         getReminders()
+        console.log(reminder);
+        
+        
     } catch (error) {
         toast({
             variant: "destructive",
@@ -78,6 +81,7 @@ const DisplayReminder = (props) => {
                       )
                 }
             })}
+
           </TableBody>
         </Table>
             {check && <div className=' flex flex-col w-full h-10 items-center justify-center '><p>No data to display</p></div>}

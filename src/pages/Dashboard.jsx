@@ -16,11 +16,11 @@ import DisplayReminder from '@/components/DisplayReminder'
 import { Profile } from '@/components/Profile'
 const Dashboard = () => {
     
-  return (
-    <div>
-      <div className='grid grid-cols-12 h-screen w-screen'>
-        <div className='col-span-1'>
-              <SidebarProvider
+  return (    
+    
+      <div className='grid grid-cols-12 h-svh w-svw '>
+        <div className=' h-svh col-span-1 '>
+        <SidebarProvider
                 style={
                   {
                     "--sidebar-width": "350px",
@@ -28,11 +28,7 @@ const Dashboard = () => {
                 }
               >
                 <AppSidebar/>
-              </SidebarProvider>
-    // <div>
-      <div className='grid grid-cols-12 h-svh w-svw '>
-        <div className=' h-svh col-span-1 '>
-         sidebar 
+        </SidebarProvider>
         </div>
         <div className=' h-svh col-span-3 '>
          <RecentExpenses/>
@@ -91,8 +87,6 @@ const Dashboard = () => {
       
         </div>
       </div>
-  
-    // </div>
 
   )
 }

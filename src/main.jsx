@@ -13,7 +13,7 @@ const apiUrl =import.meta.env.VITE_API_URL
 axios.defaults.baseURL = apiUrl
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+
     <Router>
     <UserContextProvider>
     <ExpenseContextProvider>
@@ -23,5 +23,5 @@ createRoot(document.getElementById('root')).render(
     </ExpenseContextProvider>
     </UserContextProvider>
     </Router>
-  </StrictMode>,
+
 )
