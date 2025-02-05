@@ -1,13 +1,8 @@
 "use client"
-
-import { TrendingUp } from "lucide-react"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
-
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -16,13 +11,14 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
+
 const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
+  { month: "Jan", desktop: 186 },
+  { month: "Feb", desktop: 305 },
+  { month: "Mar", desktop: 237 },
+  { month: "Apr", desktop: 73 },
   { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
+  { month: "Jun", desktop: 214 },
 ]
 
 const chartConfig = {
@@ -30,24 +26,28 @@ const chartConfig = {
     label: "Desktop",
     color: "hsl(var(--chart-1))",
   },
-} 
+}
 
 export function BarGraph() {
   return (
-    <Card className= " h-36 w-96">
-      <CardHeader>
-        <CardTitle >Daily expenses</CardTitle>
+    <Card className="w-full h-auto">
+      <CardHeader className="pb-2 pt-4 space-y-0">
+        <CardTitle className="text-sm font-medium">Daily expenses</CardTitle>
       </CardHeader>
-      <CardContent>
-        <ChartContainer className=" h-[90px] w-80" config={chartConfig}>
-          <BarChart accessibilityLayer data={chartData}>
+      <CardContent className="h-[200px]">
+        <ChartContainer config={chartConfig} className="w-full h-full">
+          <BarChart
+            accessibilityLayer
+            data={chartData}
+            className="w-full h-full"
+          >
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="month"
               tickLine={false}
               tickMargin={3}
               axisLine={false}
-              tickFormatter={(value) => value.slice(0, 3)}
+              tickFormatter={(value) => value}
             />
             <ChartTooltip
               cursor={false}

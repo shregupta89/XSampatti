@@ -58,16 +58,16 @@ export function DonutChart() {
   }, [])
 
   return (
-    <Card className="flex flex-col h-40">
+    <Card className="flex flex-col h-60 items-center justify-center">
       {/* <CardHeader className="items-center pb-0">
         <CardTitle>Pie Chart - Donut with Text</CardTitle>
       </CardHeader> */}
-      <CardContent className="flex-1 pb-0 h-32 flex-row w-full">
+      <CardContent className=" h-full flex-row w-full flex items-center justify-center ">
         <ChartContainer
           config={chartConfig}
-          className="  max-h-[250px]"
+          className="h-full"
         >
-          <PieChart className=" ">
+          <PieChart className="pt-2 ">
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
@@ -76,8 +76,8 @@ export function DonutChart() {
               data={chartData}
               dataKey="visitors"
               nameKey="browser"
-              innerRadius={40}
-              outerRadius={50}
+              innerRadius={60} // Increased from 40 to 60
+              outerRadius={80} // Increased from 50 to 80
               strokeWidth={5}
             >
               <Label
@@ -113,7 +113,7 @@ export function DonutChart() {
           </PieChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
+      <CardFooter className="flex-col gap-2 text-sm font-bold">
         Category wise distribution
       </CardFooter>
     </Card>
