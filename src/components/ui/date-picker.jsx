@@ -13,7 +13,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-export function DatePicker({ value, onChange }) {  // Accept value and onChange
+export function DatePicker ({ value, onChange }) {  // Accept value and onChange
   return (
     <Popover>
       <PopoverTrigger asChild>

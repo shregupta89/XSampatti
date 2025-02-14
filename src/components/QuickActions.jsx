@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext,useEffect } from 'react';
 import {
   Card,
   CardContent,
@@ -30,19 +30,27 @@ import {
 } from "lucide-react";
 
 const QuickActions = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  let [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(null);
   const { expenses } = useContext(ExpenseContext);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  let filteredCategories =[];
 
   // Extract unique categories from expenses
-  const uniqueCategories = [...new Set(expenses.map(expense => 
-    expense.category.name
-  ))].sort();
+  useEffect(()=>{
 
-  const filteredCategories = uniqueCategories.filter(category =>
-    category?.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+    const uniqueCategories = [...new Set(expenses.map(expense => 
+      expense.category.name
+    ))].sort();
+    console.log("uniquecat:",uniqueCategories)
+    //a new array is formed upon filtering,checking ki kya unique catgeory ke array mai seacrhquery mai dali gyi category exist krti hia? if yes then render those only
+    filteredCategories = uniqueCategories.filter(category =>
+      category?.includes(searchQuery.toLowerCase())
+    );
+
+  },[])
+
+
 
   // Get icon based on category name
   const getCategoryIcon = (categoryName) => {
@@ -107,6 +115,7 @@ const QuickActions = () => {
                       <IconComponent className="w-6 h-6 text-primary" />
                     </div>
                     <span className="text-sm font-medium capitalize text-center px-2">
+                      
                       {category}
                     </span>
                   </div>

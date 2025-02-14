@@ -2,12 +2,12 @@ import RecentExpenses from '@/components/RecentExpenses'
 import React, { useContext, useEffect } from 'react'
 import { BarGraph } from '@/components/BarGraph'
 import { DonutChart } from '@/components/DonutChart'
-import { AppSidebar } from '@/components/app-sidebar'
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar"
+// import { AppSidebar } from '@/components/app-sidebar'
+// import {
+//   SidebarInset,
+//   SidebarProvider,
+//   SidebarTrigger,
+// } from "@/components/ui/sidebar"
 import DisplayReminder from '@/components/DisplayReminder'
 import { Profile } from '@/components/Profile'
 import WeekMonthExpend from '@/components/WeekMonthExpend'
@@ -17,8 +17,8 @@ const Dashboard = () => {
     
   return (    
     
-      <div className='grid grid-cols-12 h-svh w-svw'>
-        <div className=' h-svh col-span-1 '>
+      <div className='grid grid-cols-11 h-svh w-svw'>
+        {/* <div className=' h-svh col-span-1 '>
         <SidebarProvider
                 style={
                   {
@@ -28,7 +28,7 @@ const Dashboard = () => {
               >
                 <AppSidebar/>
         </SidebarProvider>
-        </div>
+        </div> */}
         <div className=' h-svh col-span-3 '>
          <RecentExpenses/>
         </div>

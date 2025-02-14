@@ -51,9 +51,9 @@ const RecentExpenses = () => {
   }, [])
 
   return (
+    <Card className='m-4'>
     <div className="flex flex-col h-screen">
- 
-      <div className="flex-1 px-4 pb-4">
+    <div className="flex-1 px-4 pb-4">
       <div className="flex-none p-4">
         <h2 className="text-lg font-semibold mb-4">Recent Expenses</h2>
       </div>
@@ -78,8 +78,9 @@ const RecentExpenses = () => {
             </CardContent>
           </Card>
         </ScrollArea>
-      </div>
+        </div>
     </div>
+    </Card>
   );
 };
 

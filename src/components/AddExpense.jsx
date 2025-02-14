@@ -55,8 +55,8 @@ const AddExpense = () => {
         );
 
         console.log("API Response:", response.data);
-
         setExpenses([response.data.newTransaction, ...expenses]);
+        
 
         setFormData({ amount: "", date: null, category: "", desc: "" });
     } catch (error) {
