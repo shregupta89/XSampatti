@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Pencil, Trash2 } from "lucide-react";
 import { ReminderContext } from '@/context/ReminderContext';
 import { UserContext, UserContextProvider } from '@/context/UserContext';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const ReminderCard = ({ title, date, amount, onEdit, onDelete }) => {
   return (
@@ -40,7 +41,9 @@ const ReminderCard = ({ title, date, amount, onEdit, onDelete }) => {
 };
 
 const ReminderPage = () => {
-
+  
+  const {reminder}= useContext(ReminderContext)
+  const {email}=useContext(UserContext)
   const receivingReminders = [
     { id: 1, title: "Client Payment", date: "2025-02-10", amount: 2500 },
     { id: 2, title: "Freelance Work", date: "2025-02-25", amount: 800 }
@@ -58,13 +61,14 @@ const ReminderPage = () => {
     console.log('Add new', type, 'reminder');
   };
 
-  const {reminder}= useContext(ReminderContext)
-  const {email}=useContext(UserContext)
-
-  console.log(email);
+  
   
 
+  console.log(reminder)
+  console.log(email)
+
   return (
+
     <Card className=" h-screen w-screen p-1 overflow-hidden">
       <CardHeader className="pb-1">
         <CardTitle className="text-lg">Set Reminders</CardTitle>
@@ -79,18 +83,22 @@ const ReminderPage = () => {
               </CardTitle>
             </CardHeader>
             <CardContent className=" flex h-5/6 flex-col ">
+              <ScrollArea>
+
               <div className="min-h-[100px] flex h-full flex-col gap-3">
                 {reminder.map((r) => (
-                  <ReminderCard
+                  r.toBePaid?<ReminderCard
                     key={r._id}
                     title={r.category.name}
                     date={r.dayOfMonth}
                     amount={r.amount}
                     onEdit={() => handleEdit(r._id)}
                     onDelete={() => handleDelete(r._id)}
-                  />
+                  />:<span></span>
                 ))}
               </div>
+              </ScrollArea>
+
               <Button 
                 variant="outline" 
                 className="w-full justify-self-end"
