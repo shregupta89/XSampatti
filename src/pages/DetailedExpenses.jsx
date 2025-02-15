@@ -7,7 +7,11 @@ import {
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
+import PaginatedExpenses from '@/components/PaginatedExpenses'
+
 const DetailedExpenses = () => {
+    
+   
     const [date,setDate]=useState();
   return (
     <div className='grid grid-cols-4'>
@@ -21,17 +25,21 @@ const DetailedExpenses = () => {
                     className="rounded-md border shadow"
                     />
                 </div>
-                <div className='row-span-3'>
-                    {/* filter by category */}
+                <div className='row-span-3  w-full h-full'>
+                   <Card className=''>
+                    <div className='row-span-2 m-2  w-full h-full'>
+
+                    </div>
+                    </Card>
                 </div>
             </Card>
 
 
         </div>
         <div className='col-span-3'>
-           <Card className='max-w-full max-h-screen m-2'>
-
-           </Card>
+           
+            <PaginatedExpenses/>
+           
 
         </div>
     </div>
