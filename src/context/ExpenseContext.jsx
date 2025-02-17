@@ -34,7 +34,7 @@ export function ExpenseContextProvider({ children }) {
         if (expenses.length > 0) {
             localStorage.setItem("expenses", JSON.stringify(expenses));
         }
-    }, [expenses]);
+    }, [expenses,setExpenses]);
 
     return (
         <ExpenseContext.Provider value={{ expenses, setExpenses }}>

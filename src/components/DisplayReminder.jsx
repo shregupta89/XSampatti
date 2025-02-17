@@ -15,10 +15,13 @@ import {
 } from "@/components/ui/card";
 import { ReminderContext } from '@/context/ReminderContext';
 import axios from 'axios';
+import { getDate } from '@/helper/reminderHelper';
+import { useNavigate } from 'react-router-dom';
 
 const DisplayReminder = (props) => {
   const{reminder ,setReminder} =useContext(ReminderContext)
   const {outgoing} = props
+  const navigate = useNavigate()
   let check = useRef(true)
   useEffect(()=>{
     const getReminders = async()=>{
@@ -47,9 +50,10 @@ const DisplayReminder = (props) => {
     <Card className="w-full h-full overflow-clip ">
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle>{outgoing?'Payment Reminders':'Receipts'}</CardTitle>
-        <span className="text-sm text-gray-500 hover:text-gray-700 cursor-pointer">
+        <button className="text-sm text-gray-500 hover:text-gray-700 cursor-pointer" onClick={()=>navigate('/reminders')}  >
           View All
-        </span>
+        </button>
+        
       </CardHeader>
       <CardContent>
         <Table>
@@ -75,7 +79,7 @@ const DisplayReminder = (props) => {
                             {r.description.length!=0 && <span >{r.description.length>50?`${r.description.substring(0,50)}...`:`${r.description}`}</span>}
                             {r.description.length===0 && <span >empty</span>}
                           </TableCell> */}
-                          <TableCell>{r.dayOfMonth}</TableCell>
+                          <TableCell>{getDate(r.dayOfMonth)}</TableCell>
                           <TableCell className={`${r.toBePaid?'text-red-500':'text-green-400'} text-right`}>{r.amount}</TableCell>
                         </TableRow>
                       )
