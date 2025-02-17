@@ -32,7 +32,7 @@ export function DatePicker ({ value, onChange }) {  // Accept value and onChange
         <Calendar
           mode="single"
           selected={value ? new Date(value) : undefined}  // Convert string to Date
-          onSelect={(date) => onChange(date ? date.toISOString() : "")}  // Convert Date to ISO
+          onSelect={(date) => { onChange(date ? date.toISOString() : "")}}  // Convert Date to ISO
           initialFocus
         />
       </PopoverContent>

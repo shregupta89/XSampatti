@@ -25,11 +25,12 @@ export function ReminderContextProvider({ children }) {
 
     useEffect(() => {
         localStorage.setItem("reminders", JSON.stringify(reminder));
-    }, [reminder]);
+    }, [reminder , setReminder]);
 
     const filterRemindersById = (id) => {
+        console.log(id);
         setReminder(prevReminders => {
-            const filteredReminders = prevReminders.filter(reminder => reminder.id !== id);
+            const filteredReminders = prevReminders.filter(reminder => reminder._id !== id);
             localStorage.setItem("reminders", JSON.stringify(filteredReminders));
             return filteredReminders;
         });

@@ -1,17 +1,39 @@
 import React, { useEffect, useState, createContext } from "react";
+import axios from "axios";
 
 export const ExpenseContext = createContext();
 
 export function ExpenseContextProvider({ children }) {
-    const [expenses, setExpenses] = useState(() => {
-        // Try to get expenses from localStorage on initial load
-        const savedExpenses = localStorage.getItem("expenses");
-        return savedExpenses ? JSON.parse(savedExpenses) : [];
-    });
+    const [expenses, setExpenses] = useState([]);
 
-    // Whenever expenses change, save to localStorage
+    // Fetch from backend first and store in localStorage
     useEffect(() => {
-        localStorage.setItem("expenses", JSON.stringify(expenses));
+        const fetchExpenses = async () => {
+            try {
+                const response = await axios.get("/api/transaction", { withCredentials: true });
+
+                if (response.data && response.data.expenses) {
+                    setExpenses(response.data.expenses);
+                    localStorage.setItem("expenses", JSON.stringify(response.data.expenses)); // Save first-time fetch
+                }
+            } catch (error) {
+                console.error("Error fetching expenses:", error);
+            }
+        };
+
+        // Only fetch if no local storage data exists
+        // if (!localStorage.getItem("expenses")) {
+            fetchExpenses();
+        // } else {
+        //     setExpenses(JSON.parse(localStorage.getItem("expenses"))); // Load from localStorage
+        // }
+    }, []);
+
+    // Update localStorage whenever expenses change
+    useEffect(() => {
+        if (expenses.length > 0) {
+            localStorage.setItem("expenses", JSON.stringify(expenses));
+        }
     }, [expenses]);
 
     return (
