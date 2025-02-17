@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { ExpenseContext } from "@/context/ExpenseContext";
 import { Card, CardContent } from "@/components/ui/card";
-import { trimToRecent10 } from "@/helper/recentExpensehelper";
+// import { trimToRecent10 } from "@/helper/recentExpensehelper";
 import { formatDate } from "@/helper/formatDate";
 import { useToast } from '@/hooks/use-toast'
 import { ToastAction } from '@radix-ui/react-toast'
@@ -22,12 +22,15 @@ const RecentExpenses = () => {
           navigate("/login")
           return
         }
+        
         // Sort transactions by date in descending order (newest first)
-        const sortedTransactions = [...response.data.transactions].sort((a, b) => 
-          new Date(b.date) - new Date(a.date)
-        );
+        const sortedTransactions = [...response.data.transactions]
+        .filter(expense=>expense.date)
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0,10);
+
         setExpenses(sortedTransactions)
-        console.log(response.data);
+        //  console.log("Trimmed Expenses:", sortedTransactions);
 
       } catch (error) {
         toast({
@@ -44,11 +47,11 @@ const RecentExpenses = () => {
     getExpense()
   }, [])
 
-  useEffect(() => {
-    let tempexpenses = [...expenses]
-    tempexpenses = trimToRecent10(tempexpenses)
-    setExpenses([...tempexpenses])
-  }, [])
+  // useEffect(() => {
+  //   let tempexpenses = [...expenses]
+  //   tempexpenses = trimToRecent10(tempexpenses)
+  //   setExpenses([...tempexpenses])
+  // }, [])
 
   return (
     <Card className='m-4 h-4/5'>
