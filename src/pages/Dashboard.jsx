@@ -17,22 +17,11 @@ const Dashboard = () => {
     
   return (    
     
-      <div className='grid grid-cols-11 h-svh w-svw'>
-        {/* <div className=' h-svh col-span-1 '>
-        <SidebarProvider
-                style={
-                  {
-                    "--sidebar-width": "350px",
-                  } 
-                }
-              >
-                <AppSidebar/>
-        </SidebarProvider>
-        </div> */}
-        <div className=' h-svh col-span-3 '>
-         <RecentExpenses/>
+      <div className='grid grid-cols-11 h-full w-full'>
+        <div className=' h-full col-span-3 '>
+         <RecentExpenses />
         </div>
-        <div className='h-svh  col-span-8 grid grid-rows-3 '>
+        <div className='h-full  col-span-8 grid grid-rows-3 '>
           {/* upper green component */}
           <div className='row-span-2 grid grid-cols-3'>
             {/* left blue component */}

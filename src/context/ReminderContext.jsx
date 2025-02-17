@@ -1,40 +1,43 @@
-// import React, { useEffect, useState } from "react"
-// import { createContext } from "react"
-// import axios from "axios"
-// import { useToast } from "@/hooks/use-toast";
-
-// export const ReminderContext = createContext();
-
-// export function ReminderContextProvider({children}){
-//     const [reminder,setReminder]= useState([])
-//     return(
-//         <ReminderContext.Provider value={{reminder,setReminder}} >
-//         {children}
-//         </ReminderContext.Provider>
-//     )
-// }
-
-import React, { useEffect, useState } from "react"
-import { createContext } from "react"
-import axios from "axios"
+import React, { useEffect, useState, createContext } from "react";
+import axios from "axios";
 
 export const ReminderContext = createContext();
 
-export function ReminderContextProvider({children}){
-    const [reminder, setReminder] = useState(() => {
-        // Try to get reminders from localStorage on initial load
-        const savedReminders = localStorage.getItem('reminders');
-        return savedReminders ? JSON.parse(savedReminders) : [];
-    });
+export function ReminderContextProvider({ children }) {
+    const [reminder, setReminder] = useState([]);
 
-    // Whenever reminder changes, save to localStorage
     useEffect(() => {
-        localStorage.setItem('reminders', JSON.stringify(reminder));
+        const fetchReminders = async () => {
+            try {
+                const response = await axios.get("/api/reminders"); // Adjust API endpoint as needed
+                setReminder(response.data);
+                localStorage.setItem("reminders", JSON.stringify(response.data));
+            } catch (error) {
+                console.error("Error fetching reminders:", error);
+                const savedReminders = localStorage.getItem("reminders");
+                if (savedReminders) {
+                    setReminder(JSON.parse(savedReminders));
+                }
+            }
+        };
+        fetchReminders();
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("reminders", JSON.stringify(reminder));
     }, [reminder]);
 
-    return(
-        <ReminderContext.Provider value={{reminder, setReminder}}>
+    const filterRemindersById = (id) => {
+        setReminder(prevReminders => {
+            const filteredReminders = prevReminders.filter(reminder => reminder.id !== id);
+            localStorage.setItem("reminders", JSON.stringify(filteredReminders));
+            return filteredReminders;
+        });
+    };
+
+    return (
+        <ReminderContext.Provider value={{ reminder, setReminder, filterRemindersById }}>
             {children}
         </ReminderContext.Provider>
-    )
+    );
 }

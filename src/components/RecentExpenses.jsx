@@ -51,16 +51,16 @@ const RecentExpenses = () => {
   }, [])
 
   return (
-    <Card className='m-4'>
-    <div className="flex flex-col h-screen">
+    <Card className='m-4 h-4/5'>
+    <div className="flex flex-col h-full">
     <div className="flex-1 px-4 pb-4">
       <div className="flex-none p-4">
-        <h2 className="text-lg font-semibold mb-4">Recent Expenses</h2>
+        <h2 className="text-lg font-semibold">Recent Expenses</h2>
       </div>
-        <ScrollArea className="h-full">
-          <Card className="h-full">
-            <CardContent className="p-4">
-              <ul className="space-y-3">
+            <ScrollArea className="h-3/4">
+          <Card className="h-3/4 ">
+            <CardContent >
+              <ul className="space-y-3  ">
                 {expenses.length > 0 ? (
                   expenses.map((expense, index) => (
                     <li key={index} className="flex justify-between items-center border-b pb-2">
@@ -77,7 +77,7 @@ const RecentExpenses = () => {
               </ul>
             </CardContent>
           </Card>
-        </ScrollArea>
+            </ScrollArea>
         </div>
     </div>
     </Card>
