@@ -28,9 +28,13 @@ const AddExpense = () => {
   const [loading, setLoading] = useState(false);
   
   console.log("expenses fromat:  ",expenses)
+  // const handleChange = (e) => {
+  //     setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
   const handleChange = (e) => {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+};
 
   const handleSubmit = async (e) => {
       e.preventDefault();
@@ -64,28 +68,7 @@ const AddExpense = () => {
     } finally {
         setLoading(false);
     }
-      // try {
-      //     const response = await fetch("/api/transaction", {
-      //         method: "POST",
-      //         headers: { "Content-Type": "application/json" },
-      //         body: JSON.stringify({
-      //             ...formData,
-      //             date: new Date(formData.date).toISOString(),  // Ensure correct date format
-      //         }),
-      //         credentials: "include",
-      //     });
-
-      //     if (!response.ok) throw new Error("Failed to add expenditure");
-
-      //     const newExpense = await response.json();
-      //     setExpenses([newExpense, ...expenses]);
-
-      //     setFormData({ amount: "", date: null, category: "", desc: "" });
-      // } catch (error) {
-      //     console.error("Error:", error);
-      // } finally {
-      //     setLoading(false);
-      // }
+    
   };
 
   return (
@@ -122,9 +105,13 @@ const AddExpense = () => {
                           Date
                       </Label>
                       <DatePicker 
+                        selected={formData.date} 
+                        onChange={(date) => setFormData({ ...formData, date })} 
+                    />
+                      {/* <DatePicker 
                           value={formData.date} 
                           onChange={(date) => setFormData({ ...formData, date })} 
-                      />
+                      /> */}
                   </div>
                   <div className="grid grid-cols-4 items-center gap-4">
                       <Label htmlFor="category" className="text-right">

@@ -13,6 +13,23 @@ export default {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
+			darkorange:"#e76e50",
+			teal:"#299d90",
+			darkblue:"#264753",
+			lightorange:"#f4a462",
+			yellow:"#e9c469",
+			coral: {
+				50: '#fff5f2',
+				100: '#ffe6e0',
+				200: '#ffc5b8',
+				300: '#ff9c85',
+				400: '#ff7a5c',
+				500: '#e46c54', // Primary brand color
+				600: '#ed3518',
+				700: '#c52a13',
+				800: '#9c2415',
+				900: '#7c1f15',
+			  },
 			orange:'#e46c54',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
