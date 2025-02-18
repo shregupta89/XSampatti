@@ -72,7 +72,7 @@ const ReminderBox = (props) => {
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="category" className="text-right">
-              category
+              Category
             </Label>
             <Input
               type="text"
@@ -89,7 +89,7 @@ const ReminderBox = (props) => {
             <Label htmlFor="description" className="text-right">
               Description
             </Label>
-            <Textarea
+            <Input
               name="description"
               value={description}
               onChange={(e)=>setDescription(e.target.value)}
@@ -102,7 +102,7 @@ const ReminderBox = (props) => {
             <Label htmlFor="amount" className="text-right">
               Amount
             </Label>
-            <Textarea
+            <Input
               name="amount"
               value={amount}
               onChange={(e)=>setAmount(parseInt(e.target.value))}
@@ -113,9 +113,9 @@ const ReminderBox = (props) => {
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="day" className="text-right">
-              Day
+              Date
             </Label>
-            <Textarea
+            <Input
               name="day"
               value={day}
               onChange={handleDayChange}
