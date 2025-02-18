@@ -30,7 +30,7 @@ const Hero = () => {
           <div className="relative">
             {/* Person with Device */}
             <div className="relative z-10">
-              <img src="../public/hero.png" alt="" />
+              <img src="/hero.png" alt="" />
             </div>
           </div>
         </div>
