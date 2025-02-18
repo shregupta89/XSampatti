@@ -18,6 +18,7 @@ const RecentExpenses = () => {
     const getExpense = async () => {
       try {
         const response = await axios.get("/api/transaction", { withCredentials: true })
+        
         if (response.data.error) {
           navigate("/login")
           return

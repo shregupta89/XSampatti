@@ -26,32 +26,45 @@ import {
   Gift,
   Laptop,
   Shirt,
-  DollarSign
+  IndianRupee
 } from "lucide-react";
+import { DialogTrigger } from "@/components/ui/dialog";
+import ExpenseFormDialog from './ExpenseFormDialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const QuickActions = () => {
   let [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(null);
   const { expenses } = useContext(ExpenseContext);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  let filteredCategories =[];
+  // const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [filteredCategories, setFilteredCategories] = useState([]);
+  const [open, setOpen] = useState(false);
+  
 
-  // Extract unique categories from expenses
-  useEffect(()=>{
-
-    const uniqueCategories = [...new Set(expenses.map(expense => 
+  useEffect(() => {
+    console.log("hi there from quick actions");
+  
+    let uniqueCategories = [...new Set(expenses.map(expense => 
       expense.category.name
     ))].sort();
-    console.log("uniquecat:",uniqueCategories)
-    //a new array is formed upon filtering,checking ki kya unique catgeory ke array mai seacrhquery mai dali gyi category exist krti hia? if yes then render those only
-    filteredCategories = uniqueCategories.filter(category =>
-      category?.includes(searchQuery.toLowerCase())
+    
+    console.log("Unique Categories:", uniqueCategories);
+  
+    // Filter based on search query
+    let filtered = uniqueCategories.filter(category =>
+      category?.toLowerCase().includes(searchQuery.toLowerCase())
     );
-
-  },[])
-
-
-
+  
+    setFilteredCategories(filtered); // ✅ Update state properly
+  
+  }, [expenses, searchQuery]); // ✅ Re-run when expenses or searchQuery change
+  
   // Get icon based on category name
   const getCategoryIcon = (categoryName) => {
     const categoryMap = {
@@ -77,7 +90,7 @@ const QuickActions = () => {
       categoryName.toLowerCase().includes(key.toLowerCase())
     );
 
-    const IconComponent = bestMatch ? categoryMap[bestMatch] : DollarSign;
+    const IconComponent = bestMatch ? categoryMap[bestMatch] : IndianRupee;
     return IconComponent;
   };
 
@@ -106,20 +119,28 @@ const QuickActions = () => {
             const IconComponent = getCategoryIcon(category);
             return (
               <div key={category} className="aspect-square">
+                <Dialog>
+                <DialogTrigger asChild>
                 <button
                   className="w-full h-full flex items-center justify-center rounded-xl hover:bg-accent/50 transition-colors border border-border "
-                  onClick={() => handleCategoryClick(category)}
+                  onClick={() => {
+                    setOpen(true)
+                    setSelectedCategory(category);
+                    console.log("selected category",selectedCategory)
+                  }}
                 >
                   <div className="flex flex-col items-center justify-center gap-1  ">
-                    <div className="p-2 m-2 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <IconComponent className="w-6 h-6 text-primary" />
+                    <div className="p-2 m-2 rounded-lg bg-yellow/30 flex items-center justify-center">
+                      <IconComponent className="w-6 h-6 text-darkorange" />
                     </div>
-                    <span className="text-sm font-medium capitalize text-center px-2">
-                      
+                    <span className=" truncate text-sm font-medium capitalize text-center mb-1">
                       {category}
                     </span>
                   </div>
                 </button>
+                </DialogTrigger>
+                <ExpenseFormDialog open={open} setOpen={setOpen} category={selectedCategory} />
+              </Dialog>
               </div>
             );
           })}

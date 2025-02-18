@@ -31,7 +31,7 @@ const data = {
   },
   navMain: [
     {
-      title: "Dashboard",
+      title: "Dash",
       url: "/dashboard",
       icon: LayoutDashboard,
       isActive: true,
@@ -43,7 +43,7 @@ const data = {
       isActive: false,
     },
     {
-      title: "Remainder",
+      title: "Reminder",
       url: "/reminders",
       icon: BellRing,
       isActive: false,
@@ -71,12 +71,12 @@ export function AppSidebar({
         <SidebarMenuItem>
           <SidebarMenuButton size="lg" asChild className="md:h-8 md:p-0">
             <a href="/dashboard">
-              <div
+              {/* <div
                 className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                 <Command className="size-4" />
-              </div>
+              </div> */}
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">XSampatti</span>
+                <span className=" text-xl font-extrabold">XSampatti</span>
                 <span className="truncate text-xs"></span>
               </div>
             </a>
@@ -102,7 +102,7 @@ export function AppSidebar({
                     setOpen(true)
                   }}
                   isActive={activeItem.title === item.title}
-                  className="px-2.5 md:px-2">
+                  className="px-2.5 md:px-2 ">
                   <item.icon />
                   <span>{item.title}</span>
                 </SidebarMenuButton>

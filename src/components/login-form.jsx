@@ -62,12 +62,12 @@ export function LoginForm({
               <div className="flex flex-col items-center text-center">
                 <h1 className="text-2xl font-bold">Welcome back</h1>
                 <p className="text-balance text-muted-foreground">
-                  Login to your Expen account
+                  Login to your Expense account
                 </p>
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
-                <Input onChange={(e)=>setUsername(e.target.value)} id="email" type="email" placeholder="m@example.com" required />
+                <Input onChange={(e)=>setUsername(e.target.value)} id="email" type="email" placeholder="test123@example.com" required />
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
@@ -78,12 +78,12 @@ export function LoginForm({
                 </div>
                 <Input onChange={(e)=>setPassword(e.target.value)} id="password" type="password" required />
               </div>
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full bg-darkorange hover:bg-coral-600">
                 Login
               </Button>
               <div className="text-center text-sm">
                 Don&apos;t have an account?{" "}
-                <a href="#" className="underline underline-offset-4">
+                <a href="/signup" className="underline underline-offset-4">
                   Sign up
                 </a>
               </div>

@@ -42,7 +42,7 @@ const ReminderCard = ({ title, date, amount, description, onEdit, onDelete }) =>
           <h3 className="font-medium text-sm">{title}</h3>
           <div className="flex gap-4 text-sm text-gray-500">
             <span>{customDate}</span>
-            <span>${amount}</span>
+            <span>₹{amount}</span>
           </div>
           {description && (
             <p className="mt-2 text-sm text-gray-700">{description}</p>

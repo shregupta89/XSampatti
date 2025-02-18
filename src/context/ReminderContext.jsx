@@ -9,7 +9,7 @@ export function ReminderContextProvider({ children }) {
     useEffect(() => {
         const fetchReminders = async () => {
             try {
-                const response = await axios.get("/api/reminders"); // Adjust API endpoint as needed
+                const response = await axios.get("/api/reminders",{withCredentials:true}); // Adjust API endpoint as needed
                 setReminder(response.data);
                 localStorage.setItem("reminders", JSON.stringify(response.data));
             } catch (error) {

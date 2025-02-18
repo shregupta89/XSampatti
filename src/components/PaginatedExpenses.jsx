@@ -136,7 +136,7 @@ const SingleExpense = ({ category, date, amount, description, onEdit, onDelete }
                     <div className="flex-1 flex justify-between">
                         <h3 className="font-medium text-sm">{category || "Uncategorized"}</h3>
                         <div className="flex gap-8 pr-8 text-sm text-gray-500">
-                            <span>${amount}</span>
+                            <span>₹{amount}</span>
                             <span>{new Date(date).toLocaleDateString()}</span>
                         </div>
                     </div>

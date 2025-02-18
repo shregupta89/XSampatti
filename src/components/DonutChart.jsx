@@ -1,9 +1,7 @@
 "use client"
-
-import * as React from "react"
+import React,{useState,useEffect,useContext} from "react"
 import { TrendingUp } from "lucide-react"
 import { Label, Pie, PieChart } from "recharts"
-
 import {
   Card,
   CardContent,
@@ -13,71 +11,109 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import {
- 
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-const chartData = [
-  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-  { browser: "firefox", visitors: 287, fill: "var(--color-firefox)" },
-  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-  { browser: "other", visitors: 190, fill: "var(--color-other)" },
-]
+import { ExpenseContext } from "@/context/ExpenseContext";
 
-const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  chrome: {
-    label: "Chrome",
-    color: "hsl(var(--chart-1))",
-  },
-  safari: {
-    label: "Safari",
-    color: "hsl(var(--chart-2))",
-  },
-  firefox: {
-    label: "Firefox",
-    color: "hsl(var(--chart-3))",
-  },
-  edge: {
-    label: "Edge",
-    color: "hsl(var(--chart-4))",
-  },
-  other: {
-    label: "Other",
-    color: "hsl(var(--chart-5))",
-  },
-} 
+// Define colors for different categories
+const categoryColors = [
+  "hsl(var(--chart-1))",
+  "hsl(var(--chart-2))",
+  "hsl(var(--chart-3))",
+  "hsl(var(--chart-4))",
+  "hsl(var(--chart-5))",
+  "hsl(var(--chart-6))",
+  "hsl(var(--chart-7))",
+  "hsl(var(--chart-8))",
+];
 
 export function DonutChart() {
-  const totalVisitors = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.visitors, 0)
-  }, [])
+  const { expenses } = useContext(ExpenseContext);
+
+  // Calculate category counts and prepare chart data
+  const chartData = React.useMemo(() => {
+    const categoryCounts = expenses.reduce((acc, expense) => {
+      const category = expense.category?.name || "Uncategorized";
+      acc[category] = (acc[category] || 0) + 1;
+      return acc;
+    }, {});
+
+    return Object.entries(categoryCounts).map(([category, count], index) => ({
+      category,
+      count,
+      fill: categoryColors[index % categoryColors.length]
+    }));
+  }, [expenses]);
+
+  // Create chart config dynamically
+  const chartConfig = React.useMemo(() => {
+    const config = {
+      count: {
+        label: "Count",
+      }
+    };
+
+    chartData.forEach((item, index) => {
+      config[item.category] = {
+        label: item.category,
+        color: categoryColors[index % categoryColors.length]
+      };
+    });
+
+    return config;
+  }, [chartData]);
+
+  // Calculate total expenses
+  const totalExpenses = React.useMemo(() => {
+    return chartData.reduce((acc, curr) => acc + curr.count, 0);
+  }, [chartData]);
 
   return (
     <Card className="flex flex-col h-60 items-center justify-center">
-      {/* <CardHeader className="items-center pb-0">
-        <CardTitle>Pie Chart - Donut with Text</CardTitle>
-      </CardHeader> */}
-      <CardContent className=" h-full flex-row w-full flex items-center justify-center ">
+      <CardContent className="h-full flex-row w-full flex items-center justify-center">
         <ChartContainer
           config={chartConfig}
           className="h-full"
         >
-          <PieChart className="pt-2 ">
+          <PieChart className="pt-2">
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent hideLabel />}
+              content={({ active, payload }) => {
+                if (active && payload && payload.length) {
+                  return (
+                    <div className="rounded-lg border bg-background p-2 shadow-sm">
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="flex flex-col">
+                          <span className="text-[0.70rem] uppercase text-muted-foreground">
+                            Category
+                          </span>
+                          <span className="font-bold">
+                            {payload[0].payload.category}
+                          </span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-[0.70rem] uppercase text-muted-foreground">
+                            Count
+                          </span>
+                          <span className="font-bold">
+                            {payload[0].payload.count}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                }
+                return null
+              }}
             />
             <Pie
               data={chartData}
-              dataKey="visitors"
-              nameKey="browser"
-              innerRadius={60} // Increased from 40 to 60
-              outerRadius={80} // Increased from 50 to 80
+              dataKey="count"
+              nameKey="category"
+              innerRadius={60}
+              outerRadius={80}
               strokeWidth={5}
             >
               <Label
@@ -90,20 +126,20 @@ export function DonutChart() {
                         textAnchor="middle"
                         dominantBaseline="middle"
                       >
-                        {/* <tspan
+                        <tspan
                           x={viewBox.cx}
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
-                        > */}
-                          {/* {totalVisitors.toLocaleString()} */}
-                        {/* </tspan> */}
-                        {/* <tspan
+                        >
+                          {totalExpenses}
+                        </tspan>
+                        <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Visitors
-                        </tspan> */}
+                          Total
+                        </tspan>
                       </text>
                     )
                   }
