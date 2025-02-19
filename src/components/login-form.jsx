@@ -78,7 +78,7 @@ export function LoginForm({
                 </div>
                 <Input onChange={(e)=>setPassword(e.target.value)} id="password" type="password" required />
               </div>
-              <Button type="submit" className="w-full bg-darkorange hover:bg-coral-600">
+              <Button type="submit" className="w-full bg-darkorange hover:bg-darkerorange">
                 Login
               </Button>
               <div className="text-center text-sm">

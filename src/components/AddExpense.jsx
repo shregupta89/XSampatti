@@ -369,7 +369,7 @@ const AddExpense = () => {
     <>
     <Dialog>
     <DialogTrigger asChild>
-        <Button className="bg-darkorange" onClick={() => setOpen(true)}>
+        <Button className="bg-darkorange hover:bg-darkerorange" onClick={() => setOpen(true)}>
           Add New Expense
         </Button>
       </DialogTrigger>

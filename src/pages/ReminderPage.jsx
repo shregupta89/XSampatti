@@ -76,7 +76,7 @@ const ReminderCard = ({ title, date, amount, description, onEdit, onDelete }) =>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
                                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                    <AlertDialogAction onClick={onDelete}>Delete</AlertDialogAction>
+                                    <AlertDialogAction  className='bg-darkorange hover:bg-darkerorange' onClick={onDelete}>Delete</AlertDialogAction>
                                 </AlertDialogFooter>
                             </AlertDialogContent>
                         </AlertDialog>

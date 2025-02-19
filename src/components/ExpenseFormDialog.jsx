@@ -145,7 +145,7 @@ const  ExpenseFormDialog = ({ open, setOpen,category}) => {
             >
               Cancel
             </Button>
-            <Button type="submit" disabled={loading}>
+            <Button className='bg-darkorange hover:bg-darkerorange' type="submit" disabled={loading}>
               {loading ? "Adding..." : "Add Expense"}
             </Button>
           </div>

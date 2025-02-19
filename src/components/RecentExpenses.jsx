@@ -48,14 +48,10 @@ const RecentExpenses = () => {
     getExpense()
   }, [])
 
-  // useEffect(() => {
-  //   let tempexpenses = [...expenses]
-  //   tempexpenses = trimToRecent10(tempexpenses)
-  //   setExpenses([...tempexpenses])
-  // }, [])
+
 
   return (
-    <Card className='m-4 h-4/5'>
+    <Card className='m-4 '>
     <div className="flex flex-col h-full">
     <div className="flex-1 px-4 pb-4">
       <div className="flex-none p-4">
@@ -64,21 +60,26 @@ const RecentExpenses = () => {
             <ScrollArea className="h-3/4">
           <Card className="h-3/4 ">
             <CardContent >
-              <ul className="space-y-3  ">
-                {expenses.length > 0 ? (
-                  expenses.map((expense, index) => (
-                    <li key={index} className="flex justify-between items-center border-b pb-2">
-                      <div>
-                        <p className="font-medium">{expense.category.name}</p>
-                        <p className="text-sm text-gray-500">{formatDate(expense.date)}</p>
-                      </div>
-                      <p className="text-lg font-semibold text-red-600">₹{expense.amount}</p>
-                    </li>
-                  ))
-                ) : (
-                  <p className="text-gray-500 text-center">No expenses recorded.</p>
-                )}
-              </ul>
+            <ul className="space-y-3 pt-3">
+  {expenses.length > 0 ? (
+    expenses.map((expense, index) => (
+      <li 
+        key={index} 
+        className={`flex justify-between items-center ${
+          index !== expenses.length - 1 ? 'border-b' : ''
+        } pb-2`}
+      >
+        <div>
+          <p className="font-medium">{expense.category.name}</p>
+          <p className="text-sm text-gray-500">{formatDate(expense.date)}</p>
+        </div>
+        <p className="text-lg font-semibold text-red-600">₹{expense.amount}</p>
+      </li>
+    ))
+  ) : (
+    <p className="text-gray-500 text-center">No expenses recorded.</p>
+  )}
+</ul>
             </CardContent>
           </Card>
             </ScrollArea>

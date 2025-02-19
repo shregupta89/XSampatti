@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import {  ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 const renderPaginationButtons = (currentPage, setCurrentPage, filteredExpenses, totalPages) => {
     const buttons = [];
     const maxVisiblePages = 5;
@@ -37,7 +38,7 @@ const renderPaginationButtons = (currentPage, setCurrentPage, filteredExpenses, 
                 key={1}
                 variant={currentPage === 1 ? "default" : "ghost"}
                 size="icon"
-                className="h-8 w-8"
+                className={`h-8 w-8 ${currentPage === 1 ? 'bg-darkorange hover:bg-darkerorange' : 'hover:bg-darkorange'}`}
                 onClick={() => handlePageChange(1)}
             >
                 1
@@ -55,7 +56,7 @@ const renderPaginationButtons = (currentPage, setCurrentPage, filteredExpenses, 
                 key={i}
                 variant={currentPage === i ? "default" : "ghost"}
                 size="icon"
-                className="h-8 w-8"
+                className={`h-8 w-8 ${currentPage === i ? 'bg-darkorange hover:bg-darkerorange' : 'hover:bg-darkorange'}`}
                 onClick={() => handlePageChange(i)}
             >
                 {i}
@@ -73,7 +74,7 @@ const renderPaginationButtons = (currentPage, setCurrentPage, filteredExpenses, 
                 key={totalPages}
                 variant={currentPage === totalPages ? "default" : "ghost"}
                 size="icon"
-                className="h-8 w-8"
+                className={`h-8 w-8 ${currentPage === totalPages ? 'bg-darkorange hover:bg-darkerorange' : 'hover:bg-darkorange'}`}
                 onClick={() => handlePageChange(totalPages)}
             >
                 {totalPages}

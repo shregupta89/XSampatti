@@ -21,7 +21,7 @@ const AddReminder = (props) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="default" className="w-40 bg-darkorange">
+        <Button variant="default" className="w-40 bg-darkorange hover:bg-darkerorange">
           Add Reminder
         </Button>
       </DialogTrigger>

@@ -80,7 +80,7 @@ export default function SignupForm({
                 </div>
                 <Input onChange={(e)=>setPassword(e.target.value)} id="s-password" type="password" placeholder="Passsword" required />
               </div>
-              <Button type="submit" className="w-full  bg-darkorange hover:bg-coral-600">
+              <Button type="submit" className="w-full  bg-darkorange hover:bg-darkerorange">
                 Sign Up
               </Button>
               <div className="text-center text-sm">

@@ -17,7 +17,7 @@ const Hero = () => {
             Helps you to organize your income and expenses
           </p>
           <div className="flex items-center space-x-4">
-            <button onClick={()=>navigate('/login')} className="px-6 py-3 bg-darkorange hover:bg-coral-600 text-white rounded-lg flex items-center ">
+            <button onClick={()=>navigate('/login')} className="px-6 py-3 bg-darkorange hover:bg-darkerorange text-white rounded-lg flex items-center ">
               Login
               
             </button>
