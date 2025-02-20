@@ -2,7 +2,7 @@ import { toast } from '@/hooks/use-toast';
 import { ToastAction } from '@radix-ui/react-toast';
 import axios from 'axios';
 
-const deleteItem = async (id, type, filterRemindersById) => {
+const deleteItem = async (id, type, filterRemindersById, setExpenses = null,setReminder=null) => {
   try {
     const response = await axios.delete(`/api/${type}/${id}`, { withCredentials: true });
 
@@ -13,14 +13,24 @@ const deleteItem = async (id, type, filterRemindersById) => {
         description: response.data.error,
         action: <ToastAction altText="Try again">Try again</ToastAction>,
       });
-    } else {
-      toast({
-        title: "Deleted successfully",
-        description: `${type} was deleted`,
-      });
+      return false;
+    } 
 
-      type === "reminders" ? filterRemindersById(id) : console.log("deleted expense");
+    toast({
+      title: "Deleted successfully",
+      description: `${type} was deleted`,
+    });
+
+    // Handle different types of deletions
+    if (type === "reminders") {
+      filterRemindersById(id);
+      setReminder(prevReminders => prevReminders.filter(reminder => reminder._id !== id));
+    } else if (type === "transaction" && setExpenses) {
+      // Update expenses state by filtering out the deleted transaction
+      setExpenses(prevExpenses => prevExpenses.filter(expense => expense._id !== id));
     }
+
+    return true;
   } catch (error) {
     toast({
       variant: "destructive",
@@ -28,6 +38,7 @@ const deleteItem = async (id, type, filterRemindersById) => {
       description: error.response?.data?.error || error.message,
       action: <ToastAction altText="Try again">Try again</ToastAction>,
     });
+    return false;
   }
 };
 

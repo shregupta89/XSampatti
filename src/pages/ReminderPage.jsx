@@ -100,23 +100,20 @@ const ReminderPage = () => {
   const handleDelete = async(id) => {
     console.log("id of deleted item is:",id)
     const type = "reminder"; 
-    deleteItem(id, type,filterRemindersById);
+    deleteItem(id, type,filterRemindersById,setReminder);
   };
 
   
   useEffect(()=>{
-    const getReminders = async()=>{
-        const response = await axios.get('/api/reminder',{withCredentials:true})
-        if(response.data.reminders){
-            response.data.reminders.sort((a, b) => a.dayOfMonth - b.dayOfMonth);
-            setReminder(response.data.reminders)
-        }
-    }
     try {
-        getReminders()
+      const getReminders = async()=>{
+          const response = await axios.get('/api/reminder',{withCredentials:true})
+          if(response.data.reminders){
+              response.data.reminders.sort((a, b) => a.dayOfMonth - b.dayOfMonth);
+              setReminder(response.data.reminders)
+          }
+      }
         // console.log(reminder);
-        
-        
     } catch (error) {
         toast({
             variant: "destructive",
@@ -134,15 +131,15 @@ const ReminderPage = () => {
 
     <Card className=" h-full w-full p-1 overflow-hidden">
       <CardHeader className="pb-1">
-        <CardTitle className="text-lg">Set Reminders</CardTitle>
+        <CardTitle className="text-xl font-bold">Set Reminders</CardTitle>
       </CardHeader>
       <CardContent className=" h-full ">
         <div className="flex gap-6 flex-col h-5/6 md:flex-row">
           {/* Payment Reminder Card */}
           <Card className="flex-1 p-3 ">
             <CardHeader className="pb-2">
-              <CardTitle className="text-md font-normal">
-                all payment reminder
+              <CardTitle className="text-l font-bold">
+                All payment reminders <span  className="text-sm text-gray-500 font-medium">-Set reminders for amounts you need to pay.</span>
               </CardTitle>
             </CardHeader>
             <CardContent className=" space-y-4 flex flex-col">
@@ -183,8 +180,8 @@ const ReminderPage = () => {
           {/* Payment Receiving Reminders Card */}
           <Card className="flex-1 p-4">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-normal">
-                payment receiving reminders
+              <CardTitle className="text-l font-bold">
+                Payment receiving reminders<span  className="text-sm text-gray-500 font-medium">-Set reminders for payments you are expecting to receive.</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 flex flex-col">

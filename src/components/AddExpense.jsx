@@ -353,15 +353,9 @@
 // AddExpense.jsx
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { DialogTrigger } from "@/components/ui/dialog";
+import { DialogTrigger,Dialog } from "@/components/ui/dialog";
 import ExpenseFormDialog from './ExpenseFormDialog';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+
 const AddExpense = () => {
   const [open, setOpen] = useState(false);
 
@@ -382,7 +376,6 @@ const AddExpense = () => {
 
 export default AddExpense;
 
-// // Example of using the dialog with a different trigger
 // // AnotherComponent.jsx
 // import React, { useState } from 'react';
 // import { Button } from "@/components/ui/button";
