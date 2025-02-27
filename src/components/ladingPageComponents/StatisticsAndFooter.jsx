@@ -86,7 +86,7 @@ const DownloadStatsAndFooter = () => {
                   />
                   <button
                     type="submit"
-                    className="bg-darkorange text-white px-6 py-2 rounded-lg hover:bg-coral-600 transition-colors"
+                    className="bg-darkorange text-white px-6 py-2 rounded-lg hover:bg-darkerorange transition-colors"
                   >
                     Subscribe
                   </button>

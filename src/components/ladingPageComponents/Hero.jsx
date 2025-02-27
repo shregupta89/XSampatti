@@ -17,7 +17,7 @@ const Hero = () => {
             Helps you to organize your income and expenses
           </p>
           <div className="flex items-center space-x-4">
-            <button onClick={()=>navigate('/login')} className="px-6 py-3 bg-darkorange text-white rounded-lg flex items-center hover:bg-coral-600">
+            <button onClick={()=>navigate('/login')} className="px-6 py-3 bg-darkorange hover:bg-darkerorange text-white rounded-lg flex items-center ">
               Login
               
             </button>
@@ -30,7 +30,7 @@ const Hero = () => {
           <div className="relative">
             {/* Person with Device */}
             <div className="relative z-10">
-              <img src="../public/hero.png" alt="" />
+              <img src="/hero.png" alt="" />
             </div>
           </div>
         </div>

@@ -35,10 +35,10 @@ const Dashboard = () => {
                 </div>
                 <div className='cols-span-1 grid grid-rows-2 gap-2'>
                   <div className='row-span-1'>
-                   <WeekMonthExpend heading="Weekly Expenditure" amt="$1200" desc="This weeks expenses"/>
+                   <WeekMonthExpend heading="Weekly Expenditure" amt="₹1200" desc="This weeks expenses" type='weekSum'/>
                   </div>
                   <div className='row-span-1'>
-                  <WeekMonthExpend heading="Monthly Expenditure" amt="$20200" desc="This months expenses"/>
+                  <WeekMonthExpend heading="Monthly Expenditure" amt="₹20200" desc="This months expenses" type='monthSum'/>
                   </div>
                 </div>
               </div>

@@ -21,7 +21,7 @@ const FeaturesSection = () => {
           <div className="md:w-1/2 flex justify-end">
             <div className="relative">
               <img 
-                src="../public/feature1.png" 
+                src="/feature1.png" 
                 alt="Real-time support illustration" 
                 className="w-full max-w-md"
               />

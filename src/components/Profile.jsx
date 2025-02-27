@@ -23,7 +23,7 @@ export function Profile() {
     useEffect(()=>{
         const getProfile = async()=>{
             const response = await axios.get('/api/profile',{withCredentials:true})
-            console.log(response.data);
+            // console.log(response.data);
             
             if(response.data.username){
                 setEmail(response.data.username)

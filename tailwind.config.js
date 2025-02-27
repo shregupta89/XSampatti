@@ -14,6 +14,7 @@ export default {
   		},
   		colors: {
 			darkorange:"#e76e50",
+			darkerorange:"#e35835",
 			teal:"#299d90",
 			darkblue:"#264753",
 			lightorange:"#f4a462",

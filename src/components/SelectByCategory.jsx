@@ -45,8 +45,8 @@ export const CategorySelector = ({ selectedCategories, onCategoryToggle }) => {
               onClick={() => onCategoryToggle(category)}
               className={`w-full px-4 py-2 text-left rounded-lg transition-colors ${
                 selectedCategories.includes(category)
-                  ? 'bg-primary text-primary-foreground'
-                  : 'hover:bg-accent/50'
+                  ? ' bg-darkerorange text-primary-foreground'
+                  : ' hover:bg-darkorange'
               }`}
             >
               <span className="text-sm font-medium capitalize">{category}</span>
