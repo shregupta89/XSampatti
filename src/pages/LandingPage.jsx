@@ -39,6 +39,7 @@ const ExpenseTrackerLanding = () => {
         </div>
       </nav>
 
+
       {/* Main Content */}
       <main className="pt-16"> {/* Add padding to account for fixed navbar */}
         {/* Hero Section */}
@@ -48,6 +49,9 @@ const ExpenseTrackerLanding = () => {
           </div>
         </section>
 
+      <div className='w-full h-fit bg-darkorange'>
+        <img src='/Blob.png'></img>
+      </div>
         {/* Features Section */}
         <section id="features" className="bg-gray-50 py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -32,23 +32,29 @@ import {
 const QuickActions = () => {
   let [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const { expenses } = useContext(ExpenseContext);
+  const { expenses , setExpenses } = useContext(ExpenseContext);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  let filteredCategories =[];
+  // let filteredCategories =[];
+  const [filteredCategories,setFilteredCategories]=useState([])
+  const [uniqueCategories,setUniqueCategories]=useState([])
 
   // Extract unique categories from expenses
   useEffect(()=>{
+    
 
-    const uniqueCategories = [...new Set(expenses.map(expense => 
+    setUniqueCategories([...new Set(expenses.map(expense => 
       expense.category.name
-    ))].sort();
+    ))].sort());
     console.log("uniquecat:",uniqueCategories)
     //a new array is formed upon filtering,checking ki kya unique catgeory ke array mai seacrhquery mai dali gyi category exist krti hia? if yes then render those only
-    filteredCategories = uniqueCategories.filter(category =>
-      category?.includes(searchQuery.toLowerCase())
-    );
+    setFilteredCategories(uniqueCategories.filter(category =>
+      category?.includes(searchQuery?searchQuery.toLowerCase():"")
+      // searchQuery? (category?.includes(searchQuery.toLowerCase())):(true)
+    ))
+    console.log(filteredCategories);
+    
 
-  },[])
+  },[expenses , setExpenses])
 
 
 
@@ -101,7 +107,7 @@ const QuickActions = () => {
         </div>
       </CardHeader>
       <CardContent className="pb-4">
-        <div className="grid grid-cols-3 gap-4 overflow-y-auto max-h-[calc(100vh-250px)]">
+        <div className="grid grid-cols-3 gap-4 h-full overflow-y-auto ">
           {filteredCategories.map((category) => {
             const IconComponent = getCategoryIcon(category);
             return (
