@@ -51,7 +51,7 @@ const RecentExpenses = () => {
 
 
   return (
-    <Card className='m-4 '>
+    <Card className='m-4 h-fit'>
     <div className="flex flex-col h-full">
     <div className="flex-1 px-4 pb-4">
       <div className="flex-none p-4">

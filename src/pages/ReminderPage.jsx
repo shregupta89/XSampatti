@@ -105,15 +105,15 @@ const ReminderPage = () => {
 
   
   useEffect(()=>{
+    const getReminders = async()=>{
+        const response = await axios.get('/api/reminder',{withCredentials:true})
+        if(response.data.reminders){
+            response.data.reminders.sort((a, b) => a.dayOfMonth - b.dayOfMonth);
+            setReminder(response.data.reminders)
+        }
+    }
     try {
-      const getReminders = async()=>{
-          const response = await axios.get('/api/reminder',{withCredentials:true})
-          if(response.data.reminders){
-              response.data.reminders.sort((a, b) => a.dayOfMonth - b.dayOfMonth);
-              setReminder(response.data.reminders)
-          }
-      }
-        // console.log(reminder);
+        getReminders()
     } catch (error) {
         toast({
             variant: "destructive",
@@ -123,8 +123,6 @@ const ReminderPage = () => {
         })
     }
 },[])
-
-  // console.log(reminder)
 
 
   return (
@@ -142,10 +140,10 @@ const ReminderPage = () => {
                 All payment reminders <span  className="text-sm text-gray-500 font-medium">-Set reminders for amounts you need to pay.</span>
               </CardTitle>
             </CardHeader>
-            <CardContent className=" space-y-4 flex flex-col">
+            <CardContent className=" space-y-2 flex flex-col">
               <ScrollArea>
 
-              <div className="min-h-[100px] flex h-72 flex-col gap-3">
+              <div className="min-h-[100px] flex h-96 flex-col gap-3">
               {reminder.map((r) => (
                 r.toBePaid ? (
                   <ReminderCard
@@ -163,43 +161,37 @@ const ReminderPage = () => {
               ))}
             </div>
               </ScrollArea>
-
-              {/* <Button 
-                variant="outline" 
-                className="w-full self-end"
-                onClick={() => handleAdd('payment')}
-              >
-                add
-              </Button> */}
-              <div className=' self-center'>
-              <AddReminder pay={true}/>
+              <div className=' self-center '>
+                <AddReminder pay={true}/>
               </div>
             </CardContent>
           </Card>
 
           {/* Payment Receiving Reminders Card */}
-          <Card className="flex-1 p-4">
+          <Card className="flex-1 p-3 overflow-hidden">
             <CardHeader className="pb-2">
               <CardTitle className="text-l font-bold">
-                Payment receiving reminders<span  className="text-sm text-gray-500 font-medium">-Set reminders for payments you are expecting to receive.</span>
+                Payment receiving reminders<span  className="text-sm text-gray-500 font-medium">-Set reminders for payments you are expecting.</span>
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 flex flex-col">
-              <div className="min-h-[100px] h-72">
-                {reminder.map((r) => (
-                  r.toBePaid?<></>:<ReminderCard
-                  key={r._id}
-                  title={r.category.name}
-                  date={r.dayOfMonth}
-                  amount={r.amount}
-                  description={r.description} // Add description here
-                  onEdit={() => handleEdit(r._id)}
-                  onDelete={() => handleDelete(r._id)}
-                />
-                ))}
-              </div>
+            <CardContent className="space-y-2 flex flex-col">
+              <ScrollArea>
+                <div className="min-h-[100px] flex h-96 flex-col gap-3">
+                  {reminder.map((r) => (
+                    r.toBePaid?<span key={r._id}></span>:<ReminderCard
+                    key={r._id}
+                    title={r.category.name}
+                    date={r.dayOfMonth}
+                    amount={r.amount}
+                    description={r.description} // Add description here
+                    onEdit={() => handleEdit(r._id)}
+                    onDelete={() => handleDelete(r._id)}
+                  />
+                  ))}
+                </div>
+              </ScrollArea>
               <div className=' self-center'>
-              <AddReminder pay={false}/>
+                <AddReminder pay={false}/>
               </div>
             </CardContent>
           </Card>

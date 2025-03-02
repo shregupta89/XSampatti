@@ -38,7 +38,7 @@ export const CategorySelector = ({ selectedCategories, onCategoryToggle }) => {
         </div>
       </CardHeader>
       <CardContent className="pb-4">
-        <div className="grid gap-2 overflow-y-auto max-h-[calc(100vh-250px)]">
+        <div className="grid gap-2 max-h-[calc(100vh-250px)]">
           {filteredCategories.map((category) => (
             <button
               key={category}

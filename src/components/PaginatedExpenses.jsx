@@ -312,6 +312,7 @@ import {
 import deleteItem from '@/helper/deleteItem';
 import renderPaginationButtons from "@/helper/renderPaginationButtons";
 import ExpenseFormDialog from './ExpenseFormDialog';
+import { ScrollArea } from './ui/scroll-area';
 
 const ITEMS_PER_PAGE = 8;
 
@@ -422,50 +423,51 @@ const PaginatedExpenses = ({ selectedCategories = [], selectedDate }) => {
     };
 
     return (
-        <Card className="w-full h-full">
+        <Card className="w-full h-full flex flex-col">
             <CardHeader className="pb-2">
                 <CardTitle className="text-xl font-bold">Detailed Expenses</CardTitle>
             </CardHeader>
-            <CardContent>
-                <div className="h-full flex flex-col justify-between">
-                    <div className="space-y-2 overflow-y-auto flex-1">
-                        {currentExpenses.length > 0 ? (
-                            currentExpenses.map((expense) => (
-                                <SingleExpense
-                                    key={expense.id}
-                                    category={expense.category?.name}
-                                    date={expense.date}
-                                    amount={expense.amount}
-                                    description={expense.description}
-                                    onEdit={() => handleEdit(expense,expense._id)}
-                                    onDelete={() => handleDelete(expense,expense._id)}
-                                />
-                            ))
-                        ) : (
-                            <div className="flex items-center justify-center h-full text-muted-foreground">
-                                No expenses found
-                            </div>
-                        )}
-                    </div>
-                    {filteredExpenses.length > ITEMS_PER_PAGE && (
-                        <div className="flex justify-center items-center gap-1 pt-4">
-                            <PaginationButtons />
+            <CardContent className="flex flex-col flex-1">
+                {/* Expense List with Fixed Height for XL Screens */}
+                <ScrollArea className="flex-1 overflow-y-auto max-h-[calc(100vh-12rem)]">
+                    {currentExpenses.length > 0 ? (
+                        currentExpenses.map((expense) => (
+                            <SingleExpense
+                                key={expense.id}
+                                category={expense.category?.name}
+                                date={expense.date}
+                                amount={expense.amount}
+                                description={expense.description}
+                                onEdit={() => handleEdit(expense, expense._id)}
+                                onDelete={() => handleDelete(expense, expense._id)}
+                            />
+                        ))
+                    ) : (
+                        <div className="flex items-center justify-center h-full text-muted-foreground">
+                            No expenses found
                         </div>
                     )}
-                </div>
+                </ScrollArea>
+    
+                {/* Pagination: Always at Bottom */}
+                {filteredExpenses.length > ITEMS_PER_PAGE && (
+                    <div className="sticky my-1 bottom-0 bg-white p-4 flex justify-center items-center gap-1">
+                        <PaginationButtons />
+                    </div>
+                )}
             </CardContent>
+    
             <ExpenseFormDialog 
                 open={open} 
                 setOpen={setOpen}
                 isEdit={!!currentExpenseData}
                 currentExpenseData={currentExpenseData}
                 setCurrentExpenseData={setCurrentExpenseData}
-                
             />
-            {/*If currentExpenseData exists,
-isedit becomes → true, meaning the form is in edit mode.initialData is set to currentExpenseData, so the form pre-fills with existing expense details. */}
         </Card>
     );
+    
+    
 };
 
 const SingleExpense = ({ category, date, amount, description, onEdit, onDelete }) => {

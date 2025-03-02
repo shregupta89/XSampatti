@@ -31,7 +31,7 @@ export function ReminderContextProvider({ children }) {
         console.log(id);
         setReminder(prevReminders => {
             const filteredReminders = prevReminders.filter(reminder => reminder._id !== id);
-            localStorage.setItem("reminders", JSON.stringify(filteredReminders));
+            // localStorage.setItem("reminders", JSON.stringify(filteredReminders));
             return filteredReminders;
         });
     };

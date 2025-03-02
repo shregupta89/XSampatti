@@ -22,9 +22,9 @@ const deleteItem = async (id, type, filterRemindersById, setExpenses = null,setR
     });
 
     // Handle different types of deletions
-    if (type === "reminders") {
+    if (type === "reminder") {
       filterRemindersById(id);
-      setReminder(prevReminders => prevReminders.filter(reminder => reminder._id !== id));
+      // setReminder(prevReminders => prevReminders.filter(reminder => reminder._id !== id));
     } else if (type === "transaction" && setExpenses) {
       // Update expenses state by filtering out the deleted transaction
       setExpenses(prevExpenses => prevExpenses.filter(expense => expense._id !== id));

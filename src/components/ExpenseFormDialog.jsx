@@ -178,6 +178,7 @@ const ExpenseFormDialog = ({
   setOpen, 
   isEdit = false, 
   currentExpenseData = null,
+  category,
   setCurrentExpenseData = () => {} // Provide default empty function
 }) => {
   const { toast } = useToast();
@@ -203,7 +204,7 @@ const ExpenseFormDialog = ({
       // Reset form when adding new expense
       setFormData({
         amount: '',
-        category: '',
+        category:category||'',
         description: '',
         date: ''
       });
@@ -309,6 +310,7 @@ const ExpenseFormDialog = ({
       setCurrentExpenseData(null);
     }
   };
+  console.log(category)
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -340,7 +342,7 @@ const ExpenseFormDialog = ({
               id="category" 
               type="text" 
               placeholder="Enter category" 
-              value={formData.category?.name}
+              value={formData.category}
               onChange={handleChange}
               required
             />
