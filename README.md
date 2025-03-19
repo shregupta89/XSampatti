@@ -2,6 +2,8 @@
 
 A smart financial management tool that offers personalized budgeting, automated payment suggestions, and visual expense insights to enhance savings and streamline payments.
 
+Backend repo-https://github.com/bhutanidev/XSampatti-backend
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
